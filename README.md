@@ -1,2 +1,2 @@
-# Stained-Glass-Filter
-CPE 101 Engineering Exploration Final Project
+# Stainomic (Stained Glass Filter Application)
+CPE 101 Engineering Exploration Python-based Final Project
