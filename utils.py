@@ -3,26 +3,32 @@ from tkinter import filedialog
 import cv2
 import global_var
 
+# flag for filter applying
 filter_flag = 0
 
+# Save image popup using cv2
 def SaveImage():
-        
-        if global_var.Save_flag == 0:
-            errorwindow("Could not save (No image Availble!)")
-        else:
-            img_save = global_var.img
-            global Savepath
-            global_var.filesave = filedialog.asksaveasfilename(initialdir="/assets",defaultextension='*.png', title="Select a folder",filetypes=(("jpg files", "*.jpg"),("png files", "*.png"),("all files", "*.*")))
-            Savepath = global_var.filesave
-            cv2.imwrite(Savepath, img_save)
-            savesuccess()
+    if global_var.Save_flag == 0:
+        errorwindow("Could not save (No image Availble!)")
+    else:
+        img_save = global_var.img
+        global_var.filesave = filedialog.asksaveasfilename(initialdir="/assets",defaultextension='*.png', title="Select a folder",filetypes=(("jpg files", "*.jpg"),("png files", "*.png"),("all files", "*.*")))
+        global_var.Savepath = global_var.filesave
+        cv2.imwrite(global_var.Savepath, img_save)
+        savesuccess()
 
+# open image pop-up
 def open():
     global filepath
     global_var.filename = filedialog.askopenfilename(initialdir="/image", title="Select a file",filetypes=(("jpg files", "*.jpg"),("png files", "*.png"),("all files", "*.*")))
     global_var.filepath = global_var.filename
 
-   
+# stop showpic
+def StopLoop():
+    global_var.Trackbar_flag = 0
+    global_var.Stop_flag = 1
+
+# universal error window
 def errorwindow(errortext):
     top = Toplevel(global_var.window)
     top.geometry("350x100")
@@ -31,6 +37,7 @@ def errorwindow(errortext):
     B1 = Button(top, text="Okay", command = top.destroy)
     B1.pack()
 
+# success pop-up
 def savesuccess():
     top= Toplevel(global_var.window)
     top.geometry("350x100")
@@ -39,7 +46,7 @@ def savesuccess():
     B1 = Button(top, text="Okay", command = top.destroy)
     B1.pack()
 
-
+# Resize Img func to fit pop-up
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
@@ -55,11 +62,12 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
 
     return cv2.resize(image, dim, interpolation=inter)
 
+# literally nothing
 def nothing(x):
     pass
 
+# apply filter based on flag
 def Choose_Filter():
-
     if filter_flag == 0 :
         pass
     elif filter_flag == 1:

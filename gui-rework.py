@@ -15,14 +15,16 @@ assert os.path.exists(Light_Asset_Path)
 Dark_Asset_Path = os.path.join(os.path.dirname(__file__), 'assets/Dark_Asset')
 assert os.path.exists(Dark_Asset_Path)
 
+# In case you want to change Asset (Unused)
 ASSETS_PATH = Light_Asset_Path
 
 
 
-##################################################################
+############ Other UI Func (Not Referenced by other module) ##############
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
+# change filter based on value 
 def ChangeFilterFlag(value):
     utils.filter_flag = value
     if global_var.Stained_preset == 1:
@@ -30,19 +32,14 @@ def ChangeFilterFlag(value):
         stainedFunc.GeometrySegmentation()
         Showpic()
 
+# loop for preview comic style
 def StartPreviewloop():
+    if global_var.Trackbar_flag == 0:
+        comicFunc.createTrackBar()
+    comicFunc.adjustloop()
 
-        if global_var.Trackbar_flag == 0:
-           comicFunc.createTrackBar()
-        comicFunc.adjustloop()
-
-
-def StopLoop():
-    global_var.Trackbar_flag = 0
-    global_var.Stop_flag = 1
-
+# show iamge as new pop-up
 def Showpic():
-
     if global_var.Preview_flag == 1:
         global_var.Stop_flag = 0
         global_var.Save_flag = 1
@@ -55,8 +52,7 @@ def Showpic():
         utils.errorwindow("No Image Availble! (Please Browse file first)")
     
 
-#######################################################################
-
+############################# Canvas Zone ################################
 
 canvas = Canvas(
     global_var.window,
@@ -165,7 +161,7 @@ button_5 = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=StopLoop,
+    command=utils.StopLoop,
     relief="flat"
 )
 button_5.place(

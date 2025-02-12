@@ -3,6 +3,7 @@ import numpy as np
 import global_var
 from utils import Choose_Filter,errorwindow,nothing,ResizeWithAspectRatio
 
+#track bar for adjustment
 def createTrackBar():
 
     global_var.Trackbar_flag = 1
@@ -24,6 +25,7 @@ def createTrackBar():
                     161, 2 * 127,
                     BrightnessContrast) 
     
+# adjusting brightness and contrast bar
 def BrightnessContrast(img,brightness=0):
     
     # getTrackbarPos returns the current
@@ -40,22 +42,18 @@ def BrightnessContrast(img,brightness=0):
     
     return effect
 
+# actual brightness and contrast calculation
 def controller(img, brightness=255,contrast=127):
    
     brightness = int((brightness - 0) * (255 - (-255)) / (510 - 0) + (-255))
- 
     contrast = int((contrast - 0) * (127 - (-127)) / (254 - 0) + (-127))
  
     if brightness != 0:
  
         if brightness > 0:
- 
             shadow = brightness
- 
             max = 255
- 
         else:
- 
             shadow = 0
             max = 255 + brightness
  
@@ -64,24 +62,20 @@ def controller(img, brightness=255,contrast=127):
  
         # The function addWeighted calculates
         # the weighted sum of two arrays
-        cal = cv2.addWeighted(img, al_pha,
-                              img, 0, ga_mma)
- 
+        cal = cv2.addWeighted(img, al_pha,img, 0, ga_mma)
     else:
         cal = img
- 
     if contrast != 0:
         Alpha = float(131 * (contrast + 127)) / (127 * (131 - contrast))
         Gamma = 127 * (1 - Alpha)
  
         # The function addWeighted calculates
         # the weighted sum of two arrays
-        cal = cv2.addWeighted(cal, Alpha,
-                              cal, 0, Gamma)
- 
- 
+        cal = cv2.addWeighted(cal, Alpha,cal, 0, Gamma)
     return cal
  
+ # segmentation based-on k-neightbor algorithm
+ # resulting in a comic-like style
 def segmentation():
    
     if global_var.filepath == None:
@@ -124,6 +118,7 @@ def segmentation():
         global_var.Preview_flag = 1
         global_var.Stained_preset = 0
 
+# loop for bar-adjusting
 def adjustloop():
 
     if global_var.Stop_flag == 1:

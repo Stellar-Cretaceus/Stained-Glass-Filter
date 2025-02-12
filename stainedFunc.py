@@ -5,9 +5,13 @@ import matplotlib.pyplot as plt
 import os
 import global_var
 from utils import ResizeWithAspectRatio,errorwindow,Choose_Filter
+import warnings
+
+warnings.filterwarnings("ignore")
 
 voronoi = None
 
+# loop for showing stained glass-like pic
 def GeometryLoop():
 
     k = cv2.waitKey(300) & 0xFF
@@ -20,7 +24,7 @@ def GeometryLoop():
         cv2.imshow("Output", resize)
         global_var.window.after(100, GeometryLoop)
 
-
+# segmentation based on voronoi area, resulting color in stained glass pic
 def plot_voronoi(ax, img, x, y):
 
     global voronoi
@@ -29,6 +33,7 @@ def plot_voronoi(ax, img, x, y):
 
     for region_idx, (x, y) in zip(voronoi.point_region, points):
         region = voronoi.regions[region_idx]
+        # fill color based on voronoi region
         if not -1 in region:
             polygon = [voronoi.vertices[i] for i in region]
             color = "#{:02x}{:02x}{:02x}".format(*img[y, x, :])
@@ -40,6 +45,7 @@ def plot_voronoi(ax, img, x, y):
     ax.set_yticks([])
     ax.set_aspect(1)
 
+# algorithm for generate stained glass-like image using voronoi plot as a line plot
 def GeometrySegmentation():
       
     if global_var.filepath == None:
