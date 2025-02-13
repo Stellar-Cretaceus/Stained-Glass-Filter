@@ -73,8 +73,9 @@ Before running the program, ensure you have the following installed:
 
 - Trackbar For Adjusting Color, Brightness, Line Threshold (for Comic Filter)
   
-  <img src="image/Trackbar.PNG" alt="Trackbar" width="300">
+  <img src="image/Trackbar.PNG" alt="Trackbar" width="300">   
 
+- Ability to save filtered pictures
 ---
 
 ## License
