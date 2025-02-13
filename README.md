@@ -49,23 +49,31 @@ Before running the program, ensure you have the following installed:
 ## Features
 - Apply stained glass effects to images. (using Voronoi Plot)
 
-  **Example:**  
+  **Example:**
+<div style="display: flex; gap: 10px;">
   <img src="image/tulip.jpg" alt="Original Image" width="500">
   <img src="image/Output/stained.jpg" alt="Image using Stained Glass" width="500">
+</div>
 
 - Apply comic-like effects to images. (using Image Segmentation)
 
-  **Example:**  
+  **Example:**
+<div style="display: flex; gap: 10px;">
   <img src="image/tulip.jpg" alt="Original Image" width="500">
   <img src="image/Output/comic.jpg" alt="Image using Comic Filter" width="500">
+</div>
 
 - Color Filter Preset for image (using cv2 built-in Gradient)
-
-  **Example:**
-  <img src="image/Output/filter_s1.jpg" alt="Image using Comic Filter and a Color FIlter" width="500">
+  **Example:**  
+<div style="display: flex; gap: 10px;">
+  <img src="image/Output/filter_s1.jpg" alt="Image using Comic Filter and a Color Filter" width="500">
   <img src="image/Output/filter_c2.jpg" alt="Image using Comic Filter and a Color Filter" width="500">
+</div>
+
 
 - Trackbar For Adjusting Color, Brightness, Line Threshold (for Comic Filter)
+  
+  <img src="image/Trackbar.PNG" alt="Trackbar" width="300">
 
 ---
 
